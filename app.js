@@ -9,8 +9,8 @@ var options = {
     reconnect: true
   },
   identity: {
-    username: "maddog738",
-    password: "oauth:4pq8zxrn6kpo9zghx5dqluita7ed5y"
+    username: "ben_matbot",
+    password: "oauth:egxnzfj2so25sur3xeklmbmyado4et"
   },
   channels: ["maddog738"]
 };
