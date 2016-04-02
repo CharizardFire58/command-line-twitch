@@ -26,3 +26,13 @@ client.on('connected', function(address, port) {
 client.on('chat', function(channel, user, message, self){
   client.action("maddog738", "Greetings, " + user["display-name"]);
 });
+
+client.on('chat', function(channel, user, message, self){
+
+  if(message === "!clearchat") {
+
+    client.clear("maddog738");
+
+  }
+
+});
