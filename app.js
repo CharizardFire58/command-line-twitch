@@ -31,12 +31,20 @@ client.connect();
 client.on('chat', function(channel, user, message, self){
 
   if(message === "!clear") {
-
-    client.clear(settings.channel);
+      
+      client.clear(settings.channel);
 
   } else if(message === "!twitter") {
       
-   client.action(settings.channel, "https://twitter.com/twitch")
+      client.action(settings.channel, "https://twitter.com/twitch");
+      
+  } else if(message === "!subon") {
+      
+      client.subscribers(settings.channel);
+      
+  } else if(message === "!suboff") {
+      
+      client.subscribersoff(settings.channel);
       
   }
 
