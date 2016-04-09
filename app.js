@@ -33,6 +33,10 @@ client.on('chat', function(channel, user, message, self){
 
     client.clear("maddog738");
 
+  } else if(message === "!twitter") {
+      
+   client.action("maddog738", "https://twitter.com/twitch")
+      
   }
 
 });
