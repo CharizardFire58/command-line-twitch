@@ -1,4 +1,5 @@
 var tmi = require('tmi.js');
+var settings = require('./settings');
 
 var options = {
   options: {
@@ -9,33 +10,33 @@ var options = {
     reconnect: true
   },
   identity: {
-    username: "ben_matbot",
-    password: "oauth:egxnzfj2so25sur3xeklmbmyado4et"
+    username: settings.bot_name,
+    password: settings.bot_oauth
   },
-  channels: ["maddog738"]
+  channels: [settings.channel] 
 };
 
 var client = new tmi.client(options);
 client.connect();
 
-client.on('connected', function(address, port) {
-  // console.log("Address: " + address + " Port: " + port);
-  client.action("maddog738", "Testing");
-});
+// client.on('connected', function(address, port) {
+//   // console.log("Address: " + address + " Port: " + port);
+//   client.action("maddog738", "Testing");
+// });
+
+// client.on('chat', function(channel, user, message, self){
+//   client.action("maddog738", "Greetings, " + user["display-name"]);
+// });
 
 client.on('chat', function(channel, user, message, self){
-  client.action("maddog738", "Greetings, " + user["display-name"]);
-});
 
-client.on('chat', function(channel, user, message, self){
+  if(message === "!clear") {
 
-  if(message === "!clearchat") {
-
-    client.clear("maddog738");
+    client.clear(settings.channel);
 
   } else if(message === "!twitter") {
       
-   client.action("maddog738", "https://twitter.com/twitch")
+   client.action(settings.channel, "https://twitter.com/twitch")
       
   }
 
