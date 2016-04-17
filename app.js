@@ -1,4 +1,5 @@
 var tmi = require('tmi.js');
+var commander = require('commander');
 var settings = require('./settings');
 
 var options = {
@@ -21,7 +22,7 @@ client.connect();
 
 client.on('chat', function(channel, user, message, self){
 
-  if(message === "!clear") {
+  if (message === "!clear" && user === "maddog738") {
 
       client.clear(settings.channel);
 
@@ -40,3 +41,30 @@ client.on('chat', function(channel, user, message, self){
   }
 
 });
+
+function clearChat(){
+
+  client.on('chat', function(channel, user, message, self){
+
+    if (message === "!clear") {
+
+      client.clear(settings.channel);
+
+    }
+
+  });
+
+}
+
+function test() {
+
+  console.log("test");
+
+}
+
+commander
+  .version('0.01')
+  .usage('[options] <file ...>')
+  .option('-c, --clear', 'Clears the channels chat', clearChat)
+  .option('-t, --test', 'Test function', test)
+  .parse(process.argv);
