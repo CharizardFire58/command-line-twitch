@@ -76,19 +76,21 @@ function twitter(){
 
 }
 
-function say(){
-
-  
-
-}
-
 vantage
-  .command('say')
+  .command('say <channel> <message>')
   .description("Send a message to chat.")
   .action(function(args, callback) {
-    say();
-    callback();
+    say(args, callback);
   });
+
+  function say(args, callback){
+
+    console.log(args.channel);
+    console.log(args.message);
+
+    client.say(args.channel, args.message);
+
+  }
 
 vantage
   .delimiter("ben_matbot:")
