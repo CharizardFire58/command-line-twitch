@@ -1,10 +1,10 @@
-var tmi = require('tmi.js');
-var commander = require('commander');
+var vantage = require('vantage')();
 var settings = require('./settings');
+var tmi = require('tmi.js');
 
 var options = {
   options: {
-    debug: true
+    debug: false
   },
   connection: {
     cluster: "aws",
@@ -44,6 +44,8 @@ client.on('chat', function(channel, user, message, self){
 
 function clearChat(){
 
+  console.log("Test");
+
   client.on('chat', function(channel, user, message, self){
 
     if (message === "!clear") {
@@ -58,13 +60,34 @@ function clearChat(){
 
 function test() {
 
-  console.log("test");
+  console.log("This better fucking work");
 
 }
 
-commander
-  .version('0.01')
-  .usage('[options] <file ...>')
-  .option('-c, --clear', 'Clears the channels chat', clearChat)
-  .option('-t, --test', 'Test function', test)
-  .parse(process.argv);
+vantage
+  .command("foo")
+  .description("Outputs 'bar'.")
+  .action(function(args, callback) {
+    this.log("bar");
+    callback();
+  });
+
+vantage
+  .command('test')
+  .description("Test function")
+  .action(function(args, callback) {
+    test();
+    callback();
+  });
+
+vantage
+  .command('!clear')
+  .description("Clears chat")
+  .action(function(args, callback) {
+    clearChat();
+    callback();
+  });
+
+vantage
+  .delimiter("ben_matbot:")
+  .show();
