@@ -20,31 +20,7 @@ var options = {
 var client = new tmi.client(options);
 client.connect();
 
-client.on('chat', function(channel, user, message, self){
-
-  if (message === "!clear" && user === "maddog738") {
-
-      client.clear(settings.channel);
-
-  } else if(message === "!twitter") {
-
-      client.action(settings.channel, "https://twitter.com/twitch");
-
-  } else if(message === "!subon") {
-
-      client.subscribers(settings.channel);
-
-  } else if(message === "!suboff") {
-
-      client.subscribersoff(settings.channel);
-
-  }
-
-});
-
 function clearChat(){
-
-  console.log("Test");
 
   client.on('chat', function(channel, user, message, self){
 
@@ -58,33 +34,59 @@ function clearChat(){
 
 }
 
-function test() {
+function subOn(){
 
-  console.log("This better fucking work");
+  client.on('chat', function(channel, user, message, self){
+
+    if (message === "!subon") {
+
+        client.subscribers(settings.channel);
+
+    }
+
+  });
+
+}
+
+function subOff(){
+
+  client.on('chat', function(channel, user, message, self){
+
+    if (message === "!subon") {
+
+        client.subscribersoff(settings.channel);
+
+    }
+
+  });
+
+}
+
+function twitter(){
+
+  client.on('chat', function(channel, user, message, self){
+
+    if(message === "!twitter") {
+
+      client.action(settings.channel, "https://twitter.com/twitch");
+
+    }
+
+  });
+
+}
+
+function say(){
+
+  
 
 }
 
 vantage
-  .command("foo")
-  .description("Outputs 'bar'.")
+  .command('say')
+  .description("Send a message to chat.")
   .action(function(args, callback) {
-    this.log("bar");
-    callback();
-  });
-
-vantage
-  .command('test')
-  .description("Test function")
-  .action(function(args, callback) {
-    test();
-    callback();
-  });
-
-vantage
-  .command('!clear')
-  .description("Clears chat")
-  .action(function(args, callback) {
-    clearChat();
+    say();
     callback();
   });
 
