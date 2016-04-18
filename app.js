@@ -20,20 +20,6 @@ var options = {
 var client = new tmi.client(options);
 client.connect();
 
-function clearChat(){
-
-  client.on('chat', function(channel, user, message, self){
-
-    if (message === "!clear") {
-
-      client.clear(settings.channel);
-
-    }
-
-  });
-
-}
-
 function subOn(){
 
   client.on('chat', function(channel, user, message, self){
@@ -77,18 +63,33 @@ function twitter(){
 }
 
 vantage
-  .command('say <channel> <message>')
+  .command('say <channel> [message...]')
   .description("Send a message to chat.")
   .action(function(args, callback) {
-    say(args, callback);
+    say(args);
+    callback();
   });
 
-  function say(args, callback){
+  function say(args){
 
-    console.log(args.channel);
-    console.log(args.message);
+    var message = args.message.toString();
+    var message_spaced = message.replace(/,/g , " ");
 
-    client.say(args.channel, args.message);
+    client.say(args.channel, message_spaced);
+
+  }
+
+  function clearChat(args){
+
+    client.on('chat', function(channel, user, message, self){
+
+      if (message === "!clear") {
+
+        client.clear(settings.channel);
+
+      }
+
+    });
 
   }
 
