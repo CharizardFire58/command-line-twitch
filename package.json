@@ -10,5 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "tmi.js": "0.0.29",
+    "vantage": "^1.6.0"
   }
 }
