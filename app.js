@@ -20,48 +20,6 @@ var options = {
 var client = new tmi.client(options);
 client.connect();
 
-function subOn(){
-
-  client.on('chat', function(channel, user, message, self){
-
-    if (message === "!subon") {
-
-        client.subscribers(settings.channel);
-
-    }
-
-  });
-
-}
-
-function subOff(){
-
-  client.on('chat', function(channel, user, message, self){
-
-    if (message === "!subon") {
-
-        client.subscribersoff(settings.channel);
-
-    }
-
-  });
-
-}
-
-function twitter(){
-
-  client.on('chat', function(channel, user, message, self){
-
-    if(message === "!twitter") {
-
-      client.action(settings.channel, "https://twitter.com/twitch");
-
-    }
-
-  });
-
-}
-
 vantage
   .command('say <channel> [message...]')
   .description("Send a message to chat.")
@@ -86,6 +44,48 @@ vantage
       if (message === "!clear") {
 
         client.clear(settings.channel);
+
+      }
+
+    });
+
+  }
+
+  function twitter(args){
+
+    client.on('chat', function(channel, user, message, self){
+
+      if(message === "!twitter") {
+
+        client.action(settings.channel, "https://twitter.com/twitch");
+
+      }
+
+    });
+
+  }
+
+  function subOn(args){
+
+    client.on('chat', function(channel, user, message, self){
+
+      if (message === "!subon") {
+
+          client.subscribers(settings.channel);
+
+      }
+
+    });
+
+  }
+
+  function subOff(args){
+
+    client.on('chat', function(channel, user, message, self){
+
+      if (message === "!subon") {
+
+          client.subscribersoff(settings.channel);
 
       }
 
