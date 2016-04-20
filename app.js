@@ -21,8 +21,8 @@ var client = new tmi.client(options);
 client.connect();
 
 vantage
-  // .command('say <channel> [message...]')
-  .command('say [message...]')
+  .command('say <channel> [message...]')
+  // .command('say [message...]')
   .description("Send a message to chat.")
   .action(function(args, callback) {
     say(args);
@@ -34,7 +34,7 @@ vantage
     var message = args.message.toString();
     var message_spaced = message.replace(/,/g , " ");
 
-    // client.say(args.channel, message_spaced);
+    client.say(args.channel, message_spaced);
     client.say(settings.channel, message_spaced);
 
   }
