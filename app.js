@@ -1,6 +1,6 @@
 var vantage = require('vantage')();
-var settings = require('./settings');
 var tmi = require('tmi.js');
+var settings = require('./settings');
 
 var options = {
   options: {
@@ -51,7 +51,7 @@ vantage
 
         });
 
-      break;
+        break;
 
       case '!twitter':
 
@@ -61,56 +61,33 @@ vantage
 
         });
 
-      break;
+        break;
 
+      case '!subon':
+
+        client.on('chat', function(channel, user, message, self){
+
+          client.subscribers(settings.channel);
+
+        });
+
+        break;
+
+        case '!subon':
+
+        client.on('chat', function(channel, user, message, self){
+
+          client.subscribersoff(settings.channel);
+
+        });
+
+        break;
 
       default:
 
     }
 
   }
-  //
-  // function twitter(args){
-  //
-  //   client.on('chat', function(channel, user, message, self){
-  //
-  //     if(message === "!twitter") {
-  //
-  //       client.action(settings.channel, "https://twitter.com/twitch");
-  //
-  //     }
-  //
-  //   });
-  //
-  // }
-  //
-  // function subOn(args){
-  //
-  //   client.on('chat', function(channel, user, message, self){
-  //
-  //     if (message === "!subon") {
-  //
-  //         client.subscribers(settings.channel);
-  //
-  //     }
-  //
-  //   });
-  //
-  // }
-  //
-  // function subOff(args){
-  //
-  //   client.on('chat', function(channel, user, message, self){
-  //
-  //     if (message === "!subon") {
-  //
-  //         client.subscribersoff(settings.channel);
-  //
-  //     }
-  //
-  //   });
-  //
-  // }
 
 vantage
   .delimiter("ben_matbot:")
