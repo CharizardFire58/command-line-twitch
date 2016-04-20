@@ -22,7 +22,6 @@ client.connect();
 
 vantage
   .command('say <channel> [message...]')
-  // .command('say [message...]')
   .description("Send a message to chat.")
   .action(function(args, callback) {
     say(args);
@@ -35,65 +34,83 @@ vantage
     var message_spaced = message.replace(/,/g , " ");
 
     client.say(args.channel, message_spaced);
-    client.say(settings.channel, message_spaced);
-
+    commands(args);
   }
 
-  function clearChat(args){
+  function commands(args){
 
-    client.on('chat', function(channel, user, message, self){
+    var message = args.message.toString();
+    var message_spaced = message.replace(/,/g , " ");
 
-      if (message === "!clear") {
+    switch (message_spaced) {
+      case '!clear':
 
-        client.clear(settings.channel);
+        client.on('chat', function(channel, user, message, self){
 
-      }
+          client.clear(settings.channel);
 
-    });
+        });
 
-  }
+      break;
 
-  function twitter(args){
+      case '!twitter':
 
-    client.on('chat', function(channel, user, message, self){
+        client.on('chat', function(channel, user, message, self){
 
-      if(message === "!twitter") {
+          client.action(settings.channel, "https://twitter.com/twitch");
 
-        client.action(settings.channel, "https://twitter.com/twitch");
+        });
 
-      }
+      break;
 
-    });
 
-  }
+      default:
 
-  function subOn(args){
-
-    client.on('chat', function(channel, user, message, self){
-
-      if (message === "!subon") {
-
-          client.subscribers(settings.channel);
-
-      }
-
-    });
+    }
 
   }
-
-  function subOff(args){
-
-    client.on('chat', function(channel, user, message, self){
-
-      if (message === "!subon") {
-
-          client.subscribersoff(settings.channel);
-
-      }
-
-    });
-
-  }
+  //
+  // function twitter(args){
+  //
+  //   client.on('chat', function(channel, user, message, self){
+  //
+  //     if(message === "!twitter") {
+  //
+  //       client.action(settings.channel, "https://twitter.com/twitch");
+  //
+  //     }
+  //
+  //   });
+  //
+  // }
+  //
+  // function subOn(args){
+  //
+  //   client.on('chat', function(channel, user, message, self){
+  //
+  //     if (message === "!subon") {
+  //
+  //         client.subscribers(settings.channel);
+  //
+  //     }
+  //
+  //   });
+  //
+  // }
+  //
+  // function subOff(args){
+  //
+  //   client.on('chat', function(channel, user, message, self){
+  //
+  //     if (message === "!subon") {
+  //
+  //         client.subscribersoff(settings.channel);
+  //
+  //     }
+  //
+  //   });
+  //
+  // }
 
 vantage
   .delimiter("ben_matbot:")
