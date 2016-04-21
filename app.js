@@ -35,7 +35,7 @@ vantage
     var message_spaced = message.replace(/,/g , " ");
 
     client.say(args.channel, message_spaced);
-    // commands(args);
+
   }
 
   function commands(args){
@@ -74,22 +74,13 @@ vantage
 
         break;
 
-<<<<<<< HEAD
-        case '!subon':
-=======
       case '!suboff':
->>>>>>> origin/master
 
         client.on('chat', function(channel, user, message, self){
 
           client.subscribersoff(settings.channel);
 
         });
-<<<<<<< HEAD
-=======
-
-        break;
->>>>>>> origin/master
 
         break;
 
