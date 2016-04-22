@@ -1,0 +1,3 @@
+- Put each command into a seperate function.
+- Call them seperately, passing arguments in.
+- Create a seperate vantage command for each one.

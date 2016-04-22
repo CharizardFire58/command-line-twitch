@@ -35,60 +35,97 @@ vantage
 
     client.say(settings.channel, message_spaced);
 
-    switch (message_spaced) {
-      case '!clear':
+  }
 
-        client.on('chat', function(channel, user, message, self){
+vantage
+  .command('[command...]')
+  .description("Clear chat")
+  .action(function(args, callback) {
+    clearChat(args);
+    callback();
+  });
 
-          client.clear(settings.channel);
+  function clearChat(args) {
 
-        });
+    console.log(args);
 
-        break;
+    client.on('chat', function(channel, user, message, self){
 
-      case '!twitter':
+      client.clear(settings.channel);
 
-        client.on('chat', function(channel, user, message, self){
+    });
 
-          client.action(settings.channel, "https://twitter.com/"+settings.twitter);
+  }
 
-        });
+vantage
+  .command('[command...]')
+  .description("Show Twitter link")
+  .action(function(args, callback) {
+    twitter(args);
+    callback();
+  });
 
-        break;
+  function twitter(args) {
 
-      case '!facebook':
+    client.on('chat', function(channel, user, message, self){
 
-        client.on('chat', function(channel, user, message, self){
+      client.action(settings.channel, "https://twitter.com/"+settings.twitter);
 
-          client.action(settings.channel, "https://facebook.com/"+settings.facebook);
+    });
 
-        });
+  }
 
-        break;
+vantage
+  .command('[command...]')
+  .description("Show Facebook link")
+  .action(function(args, callback) {
+    facebook(args);
+    callback();
+  });
 
-      case '!subon':
+  function facebook(args) {
 
-        client.on('chat', function(channel, user, message, self){
+    client.on('chat', function(channel, user, message, self){
 
-          client.subscribers(settings.channel);
+      client.action(settings.channel, "https://facebook.com/"+settings.facebook);
 
-        });
+    });
 
-        break;
+  }
 
-      case '!suboff':
+vantage
+  .command('[command...]')
+  .description("Turn on sub mode")
+  .action(function(args, callback) {
+    facebook(args);
+    callback();
+  });
 
-        client.on('chat', function(channel, user, message, self){
+  function subOn(args) {
 
-          client.subscribersoff(settings.channel);
+    client.on('chat', function(channel, user, message, self){
 
-        });
+      client.subscribers(settings.channel);
 
-        break;
+    });
 
-      default:
+  }
 
-    }
+vantage
+  .command('[command...]')
+  .description("Turn off sub mode")
+  .action(function(args, callback) {
+    facebook(args);
+    callback();
+  });
+
+  function subOff(args) {
+
+    client.on('chat', function(channel, user, message, self){
+
+      client.subscribersoff(settings.channel);
+
+    });
 
   }
 
