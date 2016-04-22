@@ -25,7 +25,6 @@ vantage
   .description("Send a message to chat.")
   .action(function(args, callback) {
     say(args);
-    commands(args);
     callback();
   });
 
@@ -35,13 +34,6 @@ vantage
     var message_spaced = message.replace(/,/g , " ");
 
     client.say(settings.channel, message_spaced);
-
-  }
-
-  function commands(args){
-
-    var message = args.message.toString();
-    var message_spaced = message.replace(/,/g , " ");
 
     switch (message_spaced) {
       case '!clear':
