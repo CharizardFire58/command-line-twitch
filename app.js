@@ -38,94 +38,72 @@ vantage
   }
 
 vantage
-  .command('[command...]')
+  .command('!clear')
   .description("Clear chat")
   .action(function(args, callback) {
-    clearChat(args);
+    clearChat();
     callback();
   });
 
-  function clearChat(args) {
+  function clearChat() {
 
-    console.log(args);
-
-    client.on('chat', function(channel, user, message, self){
-
-      client.clear(settings.channel);
-
-    });
+    client.clear(settings.channel);
 
   }
 
 vantage
-  .command('[command...]')
+  .command('!twitter')
   .description("Show Twitter link")
   .action(function(args, callback) {
-    twitter(args);
+    twitter();
     callback();
   });
 
-  function twitter(args) {
+  function twitter() {
 
-    client.on('chat', function(channel, user, message, self){
-
-      client.action(settings.channel, "https://twitter.com/"+settings.twitter);
-
-    });
+    client.action(settings.channel, "https://twitter.com/"+settings.twitter);
 
   }
 
 vantage
-  .command('[command...]')
+  .command('!facebook')
   .description("Show Facebook link")
   .action(function(args, callback) {
-    facebook(args);
+    facebook();
     callback();
   });
 
-  function facebook(args) {
+  function facebook() {
 
-    client.on('chat', function(channel, user, message, self){
-
-      client.action(settings.channel, "https://facebook.com/"+settings.facebook);
-
-    });
+    client.action(settings.channel, "https://facebook.com/"+settings.facebook);
 
   }
 
 vantage
-  .command('[command...]')
+  .command('!subon')
   .description("Turn on sub mode")
   .action(function(args, callback) {
-    facebook(args);
+    subOn();
     callback();
   });
 
-  function subOn(args) {
+  function subOn() {
 
-    client.on('chat', function(channel, user, message, self){
-
-      client.subscribers(settings.channel);
-
-    });
+    client.subscribers(settings.channel);
 
   }
 
 vantage
-  .command('[command...]')
+  .command('!suboff')
   .description("Turn off sub mode")
   .action(function(args, callback) {
-    facebook(args);
+    subOff();
     callback();
   });
 
-  function subOff(args) {
+  function subOff() {
 
-    client.on('chat', function(channel, user, message, self){
-
-      client.subscribersoff(settings.channel);
-
-    });
+    client.subscribersoff(settings.channel);
 
   }
 
