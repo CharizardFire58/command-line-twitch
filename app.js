@@ -108,8 +108,8 @@ vantage
   }
 
 vantage
-  .command('!timeout [username...] [seconds]')
-  .description("Turn off sub mode")
+  .command('!timeout [username] [seconds]')
+  .description("Timeout a user")
   .action(function(args, callback) {
     timeout(args);
     callback();
@@ -119,9 +119,26 @@ vantage
 
     console.log(args);
 
-    client.timeout(settings.channel, "username", 300);
+    client.timeout(settings.channel, args.username, args.seconds);
 
   }
+
+vantage
+  .command('!host [channel]')
+  .description("Host another channel")
+  .action(function(args, callback) {
+    host(args);
+    callback();
+  });
+
+  function host(args) {
+
+    console.log(args.channel);
+
+    // client.host(settings.channel, args.channel);
+
+  }
+
 
 vantage
   .delimiter("ben_matbot:")
