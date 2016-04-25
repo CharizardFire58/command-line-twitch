@@ -140,7 +140,7 @@ vantage
   }
 
 vantage
-  .command('!slowon [time]')
+  .command('!slowon [seconds]')
   .description("Enable slow mode")
   .action(function(args, callback) {
     slowOn(args);
@@ -166,6 +166,35 @@ vantage
     client.slowoff(settings.channel);
 
   }
+
+vantage
+  .command('!r9kon')
+  .description("Enable R9K mode")
+  .action(function(args, callback) {
+    r9kOn(args);
+    callback();
+  });
+
+  function r9kOn(args) {
+
+    client.r9kbeta(settings.channel);
+
+  }
+
+vantage
+  .command('!r9koff')
+  .description("Disable R9K mode")
+  .action(function(args, callback) {
+    r9kOff(args);
+    callback();
+  });
+
+  function r9kOff(args) {
+
+    client.r9kbetaoff(settings.channel);
+
+  }
+
 
 vantage
   .delimiter("ben_matbot:")
