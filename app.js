@@ -139,6 +139,33 @@ vantage
 
   }
 
+vantage
+  .command('!slowon [time]')
+  .description("Enable slow mode")
+  .action(function(args, callback) {
+    slowOn(args);
+    callback();
+  });
+
+  function slowOn(args) {
+
+    client.slow(settings.channel, args.time);
+
+  }
+
+vantage
+  .command('!slowoff')
+  .description("Disable slow mode")
+  .action(function(args, callback) {
+    slowOff(args);
+    callback();
+  });
+
+  function slowOff(args) {
+
+    client.slowoff(settings.channel);
+
+  }
 
 vantage
   .delimiter("ben_matbot:")
