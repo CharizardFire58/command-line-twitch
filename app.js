@@ -195,6 +195,34 @@ vantage
 
   }
 
+vantage
+  .command('!emoteonly')
+  .description("Enable emote only mode")
+  .action(function(args, callback) {
+    emoteOnly(args);
+    callback();
+  });
+
+  function emoteOnly(args) {
+
+    client.emoteonly(settings.channel);
+
+  }
+
+vantage
+  .command('!emoteoff')
+  .description("Disable emote only mode")
+  .action(function(args, callback) {
+    emoteOff(args);
+    callback();
+  });
+
+  function emoteOff(args) {
+
+    client.emoteonlyoff(settings.channel);
+
+  }
+
 
 vantage
   .delimiter("ben_matbot:")
