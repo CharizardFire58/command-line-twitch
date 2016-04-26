@@ -1,6 +1,6 @@
 {
   "name": "twitchchatbot",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A simple chat bot for Twitch",
   "main": "app.js",
   "scripts": {
