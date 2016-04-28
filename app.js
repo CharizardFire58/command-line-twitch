@@ -1,7 +1,7 @@
 var vantage = require('vantage')();
 var tmi = require('tmi.js');
 
-function commandLineTwitch(facebook, twitter, channel, bot, oauth) {
+function commandLineTwitch(facebook_link, twitter_link, channel, bot, oauth) {
 
   var options = {
     options: {
@@ -12,10 +12,10 @@ function commandLineTwitch(facebook, twitter, channel, bot, oauth) {
       reconnect: true
     },
     identity: {
-      username: settings.bot_name,
-      password: settings.bot_oauth
+      username: bot,
+      password: oauth
     },
-    channels: [settings.channel]
+    channels: [channel]
   };
 
   var client = new tmi.client(options);
@@ -60,9 +60,9 @@ function commandLineTwitch(facebook, twitter, channel, bot, oauth) {
       callback();
     });
 
-    function twitter() {
+    function twitter(twitter_link) {
 
-      client.action(settings.channel, "https://twitter.com/"+settings.twitter);
+      client.action(settings.channel, "https://twitter.com/"+twitter_link);
 
     }
 
@@ -74,9 +74,9 @@ function commandLineTwitch(facebook, twitter, channel, bot, oauth) {
       callback();
     });
 
-    function facebook() {
+    function facebook(facebook_link) {
 
-      client.action(settings.channel, "https://facebook.com/"+settings.facebook);
+      client.action(settings.channel, "https://facebook.com/"+facebook_link);
 
     }
 
