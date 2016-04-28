@@ -7,7 +7,19 @@ Based on the following tutorial: https://youtu.be/K6N9dSMb7sM
 
 
 #Supported commands
-
+* say [message] - Send a message to chat.
+* !twitter - Show Twitter link.
+* !facebook - Show Facebook link.
+* !subon - Enable sub mode.
+* !suboff - Disable sub mode.
+* !timeout [username] [seconds] - Timeout a user.
+* !host [channel] - Host another channel.
+* !slowon [seconds] - Enable slow mode.
+* !slowoff - Disable slow mode.
+* !r9kon - Enable R9K mode.
+* !r9koff - Disable R9k mode.
+* !emoteonly - Enable emote only mode.
+* !emoteoff - Disable emote only mode.
 
 #Example
 ```javascript
