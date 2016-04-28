@@ -1,229 +1,232 @@
 var vantage = require('vantage')();
 var tmi = require('tmi.js');
-var settings = require('./settings');
 
-var options = {
-  options: {
-    debug: false
-  },
-  connection: {
-    cluster: "aws",
-    reconnect: true
-  },
-  identity: {
-    username: settings.bot_name,
-    password: settings.bot_oauth
-  },
-  channels: [settings.channel]
-};
+function commandLineTwitch(facebook, twitter, channel, bot, oauth) {
 
-var client = new tmi.client(options);
-client.connect();
+  var options = {
+    options: {
+      debug: false
+    },
+    connection: {
+      cluster: "aws",
+      reconnect: true
+    },
+    identity: {
+      username: settings.bot_name,
+      password: settings.bot_oauth
+    },
+    channels: [settings.channel]
+  };
 
-vantage
-  .command('say [message...]')
-  .description("Send a message to chat.")
-  .action(function(args, callback) {
-    say(args);
-    callback();
-  });
+  var client = new tmi.client(options);
+  client.connect();
 
-  function say(args){
+  vantage
+    .command('say [message...]')
+    .description("Send a message to chat.")
+    .action(function(args, callback) {
+      say(args);
+      callback();
+    });
 
-    var message = args.message.toString();
-    var message_spaced = message.replace(/,/g , " ");
+    function say(args){
 
-    client.say(settings.channel, message_spaced);
+      var message = args.message.toString();
+      var message_spaced = message.replace(/,/g , " ");
 
-  }
+      client.say(settings.channel, message_spaced);
 
-vantage
-  .command('!clear')
-  .description("Clear chat")
-  .action(function(args, callback) {
-    clearChat();
-    callback();
-  });
+    }
 
-  function clearChat() {
+  vantage
+    .command('!clear')
+    .description("Clear chat")
+    .action(function(args, callback) {
+      clearChat();
+      callback();
+    });
 
-    client.clear(settings.channel);
+    function clearChat() {
 
-  }
+      client.clear(settings.channel);
 
-vantage
-  .command('!twitter')
-  .description("Show Twitter link")
-  .action(function(args, callback) {
-    twitter();
-    callback();
-  });
+    }
 
-  function twitter() {
+  vantage
+    .command('!twitter')
+    .description("Show Twitter link")
+    .action(function(args, callback) {
+      twitter();
+      callback();
+    });
 
-    client.action(settings.channel, "https://twitter.com/"+settings.twitter);
+    function twitter() {
 
-  }
+      client.action(settings.channel, "https://twitter.com/"+settings.twitter);
 
-vantage
-  .command('!facebook')
-  .description("Show Facebook link")
-  .action(function(args, callback) {
-    facebook();
-    callback();
-  });
+    }
 
-  function facebook() {
+  vantage
+    .command('!facebook')
+    .description("Show Facebook link")
+    .action(function(args, callback) {
+      facebook();
+      callback();
+    });
 
-    client.action(settings.channel, "https://facebook.com/"+settings.facebook);
+    function facebook() {
 
-  }
+      client.action(settings.channel, "https://facebook.com/"+settings.facebook);
 
-vantage
-  .command('!subon')
-  .description("Turn on sub mode")
-  .action(function(args, callback) {
-    subOn();
-    callback();
-  });
+    }
 
-  function subOn() {
+  vantage
+    .command('!subon')
+    .description("Turn on sub mode")
+    .action(function(args, callback) {
+      subOn();
+      callback();
+    });
 
-    client.subscribers(settings.channel);
+    function subOn() {
 
-  }
+      client.subscribers(settings.channel);
 
-vantage
-  .command('!suboff')
-  .description("Turn off sub mode")
-  .action(function(args, callback) {
-    subOff();
-    callback();
-  });
+    }
 
-  function subOff() {
+  vantage
+    .command('!suboff')
+    .description("Turn off sub mode")
+    .action(function(args, callback) {
+      subOff();
+      callback();
+    });
 
-    client.subscribersoff(settings.channel);
+    function subOff() {
 
-  }
+      client.subscribersoff(settings.channel);
 
-vantage
-  .command('!timeout [username] [seconds]')
-  .description("Timeout a user")
-  .action(function(args, callback) {
-    timeout(args);
-    callback();
-  });
+    }
 
-  function timeout(args) {
+  vantage
+    .command('!timeout [username] [seconds]')
+    .description("Timeout a user")
+    .action(function(args, callback) {
+      timeout(args);
+      callback();
+    });
 
-    console.log(args);
+    function timeout(args) {
 
-    client.timeout(settings.channel, args.username, args.seconds);
+      console.log(args);
 
-  }
+      client.timeout(settings.channel, args.username, args.seconds);
 
-vantage
-  .command('!host [channel]')
-  .description("Host another channel")
-  .action(function(args, callback) {
-    host(args);
-    callback();
-  });
+    }
 
-  function host(args) {
+  vantage
+    .command('!host [channel]')
+    .description("Host another channel")
+    .action(function(args, callback) {
+      host(args);
+      callback();
+    });
 
-    console.log(args.channel);
+    function host(args) {
 
-    // client.host(settings.channel, args.channel);
+      console.log(args.channel);
 
-  }
+      // client.host(settings.channel, args.channel);
 
-vantage
-  .command('!slowon [seconds]')
-  .description("Enable slow mode")
-  .action(function(args, callback) {
-    slowOn(args);
-    callback();
-  });
+    }
 
-  function slowOn(args) {
+  vantage
+    .command('!slowon [seconds]')
+    .description("Enable slow mode")
+    .action(function(args, callback) {
+      slowOn(args);
+      callback();
+    });
 
-    client.slow(settings.channel, args.time);
+    function slowOn(args) {
 
-  }
+      client.slow(settings.channel, args.time);
 
-vantage
-  .command('!slowoff')
-  .description("Disable slow mode")
-  .action(function(args, callback) {
-    slowOff(args);
-    callback();
-  });
+    }
 
-  function slowOff(args) {
+  vantage
+    .command('!slowoff')
+    .description("Disable slow mode")
+    .action(function(args, callback) {
+      slowOff(args);
+      callback();
+    });
 
-    client.slowoff(settings.channel);
+    function slowOff(args) {
 
-  }
+      client.slowoff(settings.channel);
 
-vantage
-  .command('!r9kon')
-  .description("Enable R9K mode")
-  .action(function(args, callback) {
-    r9kOn(args);
-    callback();
-  });
+    }
 
-  function r9kOn(args) {
+  vantage
+    .command('!r9kon')
+    .description("Enable R9K mode")
+    .action(function(args, callback) {
+      r9kOn(args);
+      callback();
+    });
 
-    client.r9kbeta(settings.channel);
+    function r9kOn(args) {
 
-  }
+      client.r9kbeta(settings.channel);
 
-vantage
-  .command('!r9koff')
-  .description("Disable R9K mode")
-  .action(function(args, callback) {
-    r9kOff(args);
-    callback();
-  });
+    }
 
-  function r9kOff(args) {
+  vantage
+    .command('!r9koff')
+    .description("Disable R9K mode")
+    .action(function(args, callback) {
+      r9kOff(args);
+      callback();
+    });
 
-    client.r9kbetaoff(settings.channel);
+    function r9kOff(args) {
 
-  }
+      client.r9kbetaoff(settings.channel);
 
-vantage
-  .command('!emoteonly')
-  .description("Enable emote only mode")
-  .action(function(args, callback) {
-    emoteOnly(args);
-    callback();
-  });
+    }
 
-  function emoteOnly(args) {
+  vantage
+    .command('!emoteonly')
+    .description("Enable emote only mode")
+    .action(function(args, callback) {
+      emoteOnly(args);
+      callback();
+    });
 
-    client.emoteonly(settings.channel);
+    function emoteOnly(args) {
 
-  }
+      client.emoteonly(settings.channel);
 
-vantage
-  .command('!emoteoff')
-  .description("Disable emote only mode")
-  .action(function(args, callback) {
-    emoteOff(args);
-    callback();
-  });
+    }
 
-  function emoteOff(args) {
+  vantage
+    .command('!emoteoff')
+    .description("Disable emote only mode")
+    .action(function(args, callback) {
+      emoteOff(args);
+      callback();
+    });
 
-    client.emoteonlyoff(settings.channel);
+    function emoteOff(args) {
 
-  }
+      client.emoteonlyoff(settings.channel);
+
+    }
 
 
-vantage
-  .delimiter("ben_matbot:")
-  .show();
+  vantage
+    .delimiter("ben_matbot:")
+    .show();
+
+}
