@@ -1,6 +1,6 @@
 {
   "name": "command-line-twitch",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Command line implementation of Twitch chat commands using tmi.js.",
   "main": "app.js",
   "scripts": {
