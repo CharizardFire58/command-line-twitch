@@ -1,10 +1,7 @@
 Command line implementation of Twitch chat commands using tmi.js
 
-Based on the following tutorial: https://youtu.be/K6N9dSMb7sM
-
 #What it does
 * Allows you to run Twitch chat commands from the command line.
-
 
 #Supported commands
 * say [message] - Send a message to chat.
